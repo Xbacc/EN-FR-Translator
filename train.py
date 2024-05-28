@@ -1,4 +1,5 @@
 from model import *
+from language_model import *
 from torchtext.vocab import build_vocab_from_iterator
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader, Dataset
@@ -13,11 +14,6 @@ import os
 import numpy as np
 import pandas as pd
 import torchtext; torchtext.disable_torchtext_deprecation_warning()
-
-# install EN&FR spacy models
-from spacy.cli import download
-download("en_core_web_sm")
-download("fr_core_news_sm")
 
 # Set seed.
 seed = 42
