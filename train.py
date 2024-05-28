@@ -15,6 +15,11 @@ import numpy as np
 import pandas as pd
 import torchtext; torchtext.disable_torchtext_deprecation_warning()
 
+# install EN&FR spacy models
+from spacy.cli import download
+download("en_core_web_sm")
+download("fr_core_news_sm")
+
 # Set seed.
 seed = 42
 np.random.seed(seed)
