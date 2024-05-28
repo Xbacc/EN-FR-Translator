@@ -1,0 +1,7 @@
+torch
+torchtext
+spacy
+scikit-learn
+tqdm
+numpy
+pandas
