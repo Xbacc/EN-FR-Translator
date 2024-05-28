@@ -1,5 +1,4 @@
 from model import *
-from language_model import *
 from torchtext.vocab import build_vocab_from_iterator
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader, Dataset
@@ -14,11 +13,6 @@ import os
 import numpy as np
 import pandas as pd
 import torchtext; torchtext.disable_torchtext_deprecation_warning()
-
-# install EN&FR spacy models
-# from spacy.cli import download
-# download("en_core_web_sm")
-# download("fr_core_news_sm")
 
 # Set seed.
 seed = 42
@@ -90,17 +84,20 @@ def sequential_transforms(*transforms):
             txt_input = transform(txt_input)
         return txt_input
     return func
+
 # function to add BOS/EOS and create tensor for input sequence indices
 def tensor_transform(token_ids: List[int]):
     return torch.cat((torch.tensor([BOS_IDX]),
                       torch.tensor(token_ids),
                       torch.tensor([EOS_IDX])))
+
 # `src` and `tgt` language text transforms to convert raw strings into tensors indices
 text_transform = {}
 for ln in [SRC_LANGUAGE, TGT_LANGUAGE]:
     text_transform[ln] = sequential_transforms(token_transform[ln], # Tokenization
                                                vocab_transform[ln], # Numericalization
                                                tensor_transform) # Add BOS/EOS and create tensor
+    
 # function to collate data samples into batch tensors
 def collate_fn(batch):
     src_batch, tgt_batch = [], []
@@ -115,6 +112,7 @@ def generate_square_subsequent_mask(sz):
     mask = (torch.triu(torch.ones((sz, sz), device=DEVICE)) == 1).transpose(0, 1)
     mask = mask.float().masked_fill(mask == 0, float('-inf')).masked_fill(mask == 1, float(0.0))
     return mask
+
 def create_mask(src, tgt):
     src_seq_len = src.shape[1]
     tgt_seq_len = tgt.shape[1]
@@ -216,6 +214,7 @@ def evaluate(model):
         losses += loss.item()
     return losses / len(list(val_dataloader))
 
+# Run the code below if you want to train the model.
 # train_loss_list, valid_loss_list = [], []
 # for epoch in range(1, NUM_EPOCHS+1):
 #     start_time = timer()
