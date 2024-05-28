@@ -15,9 +15,9 @@ import pandas as pd
 import torchtext; torchtext.disable_torchtext_deprecation_warning()
 
 # install EN&FR spacy models
-# from spacy.cli import download
-# download("en_core_web_sm")
-# download("fr_core_news_sm")
+from spacy.cli import download
+download("en_core_web_sm")
+download("fr_core_news_sm")
 
 # Set seed.
 seed = 42
@@ -215,7 +215,7 @@ def evaluate(model):
         losses += loss.item()
     return losses / len(list(val_dataloader))
 
-train_loss_list, valid_loss_list = [], []
+# train_loss_list, valid_loss_list = [], []
 # for epoch in range(1, NUM_EPOCHS+1):
 #     start_time = timer()
 #     train_loss = train_epoch(model, optimizer)
