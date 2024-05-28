@@ -4,6 +4,7 @@ from torch import Tensor
 import torch
 import torch.nn as nn
 import math
+import torchtext; torchtext.disable_torchtext_deprecation_warning()
 
 class PositionalEncoding(nn.Module):
     def __init__(self, d_model, dropout, max_len=5000):
@@ -32,7 +33,6 @@ class PositionalEncoding(nn.Module):
         x = x + self.pe[:, :x.size(1)]
         return self.dropout(x)
     
-
 class TokenEmbedding(nn.Module):
     def __init__(self, vocab_size: int, emb_size):
         super(TokenEmbedding, self).__init__()

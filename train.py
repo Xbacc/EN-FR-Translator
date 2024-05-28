@@ -12,17 +12,18 @@ from tqdm.auto import tqdm
 import os
 import numpy as np
 import pandas as pd
+import torchtext; torchtext.disable_torchtext_deprecation_warning()
 
 # install EN&FR spacy models
-from spacy.cli import download
-download("en_core_web_sm")
-download("fr_core_news_sm")
+# from spacy.cli import download
+# download("en_core_web_sm")
+# download("fr_core_news_sm")
 
 # Set seed.
 seed = 42
 np.random.seed(seed)
 torch.manual_seed(seed)
-torch.cuda.manual_seed(seed)
+# torch.cuda.manual_seed(seed)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = True
 
@@ -130,7 +131,8 @@ FFN_HID_DIM = 192
 BATCH_SIZE = 192
 NUM_ENCODER_LAYERS = 3
 NUM_DECODER_LAYERS = 3
-DEVICE = 'cuda'
+# DEVICE = 'cuda'
+DEVICE = 'cpu'
 NUM_EPOCHS = 50
 
 model = Seq2SeqTransformer(
@@ -146,7 +148,7 @@ model = Seq2SeqTransformer(
 
 # Total parameters and trainable parameters.
 total_params = sum(p.numel() for p in model.parameters())
-print(f"{total_params:,} total parameters.")
+# print(f"{total_params:,} total parameters.")
 total_trainable_params = sum(
     p.numel() for p in model.parameters() if p.requires_grad)
 
