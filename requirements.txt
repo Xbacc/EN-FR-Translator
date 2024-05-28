@@ -1,7 +1,10 @@
 torch
+torchvision
+torchaudio
 torchtext
 spacy
 scikit-learn
 tqdm
 numpy
 pandas
+portalocker
