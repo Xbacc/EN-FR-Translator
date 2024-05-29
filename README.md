@@ -30,5 +30,6 @@ streamlit run streamlit_app.py
 
 ### Running on Cloud
 Follow the link below to use the application:
+[https://en-fr-translator.streamlit.app/](https://en-fr-translator.streamlit.app/)
 
-[]
+### Thank you. Merci. 😁
